@@ -14,11 +14,11 @@ https://www.apple.com/itunes/download/
 https://www.microsoft.com/en-us/download/details.aspx?id=48145
   
 ### Mac OSX:
-* .NET 5.0 Runtime (macOS 10.13 "High Sierra" or newer)  
-https://dotnet.microsoft.com/download/dotnet/thank-you/runtime-5.0.10-macos-x64-installer
+* .NET 6.0 Runtime (macOS 10.13 "High Sierra" or newer) - **make sure it's the x64 version, even if you have an M1/M2 Mac**
+https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 
 ### Ubuntu:
-* .NET 5.0 Runtime (only dotnet-runtime-5.0 package is required)  
+* .NET 6.0 Runtime (only dotnet-runtime-6.0 package is required)  
 https://docs.microsoft.com/en-gb/dotnet/core/install/linux-ubuntu
   
 ## Download:
@@ -33,8 +33,12 @@ Open the DMG and drag the application to the Desktop or Applications folder. Dou
 
 ### Ubuntu
 ```
-chmod +x iFakeLocation.sh
-./iFakeLocation.sh
+chmod +x ./iFakeLocation
+./iFakeLocation
+
+# or
+
+dotnet ./iFakeLocation.dll
 ```
 
 ## How to make it work on iOS X.X?
@@ -45,6 +49,7 @@ Create a folder called "DeveloperImages" (next to the iFakeLocation executable) 
 https://github.com/haikieu/xcode-developer-disk-image-all-platforms/tree/master/DiskImages/iPhoneOS.platform/DeviceSupport
 
 ## How to use:
+
 * Connect your iDevice to your computer. Click the "Refresh" button and select your iDevice from the list.
 
 * Enter the desired location (ie. Sydney NSW) in the box and hit "Search" (try to be
@@ -65,6 +70,16 @@ https://github.com/haikieu/xcode-developer-disk-image-all-platforms/tree/master/
 ## Help:
 Q: My device doesn't show up on the list?  
 A: Ensure that it is plugged in, you have trusted your PC and that the device is visible on iTunes.
+
+Q: Help, it says that it can't mount the image or some other generic error?  
+A: Make sure your iDevice is trusted with the PC/Mac and if everything you've tried is not working, usually a reboot of your device will fix the issue
+
+Q: Unable to load shared library 'imobiledevice' or one of its dependencies
+A: set environment variable `DYLD_LIBRARY_PATH` to the folder which has the `libimobiledevice` files, and run the project with specified framework and runtime, e.g.
+```shell
+export DYLD_LIBRARY_PATH=$HOME/iFakeLocation/iFakeLocation/bin/Debug/net6.0/runtimes/osx-x64/native
+dotnet run --project ./iFakeLocation/iFakeLocation.csproj --framework net6.0 --runtime osx-x64
+```
 
 ## Special Thanks:
 * [idevicelocation by JonGabilondoAngulo](https://github.com/JonGabilondoAngulo/idevicelocation)
